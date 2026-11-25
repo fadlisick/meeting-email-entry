@@ -1,61 +1,63 @@
-"""One-line joke entry: a meeting that should have been an email.
+"""Meeting-email joke entry: one line, written out as entry.txt.
 
-The grader runs this program twice and reads entry.txt from the output
-folder. The joke itself is the whole entry, so the program stays small:
-it validates the single line, writes it out exactly, and reads it back
-to prove the write landed.
+The grader runs this program twice and reads the file it leaves in the
+output folder. The joke is the whole entry, so the program does one
+job only: check the single line against the cap, write it exactly,
+then read it back to confirm the write.
 """
 
 import os
 import sys
 
-JOKE = "My calendar invited me to a meeting to read an email I had already written, so I RSVP'd yes and forwarded it my regrets."
-LIMIT = 200
-NAME = "entry.txt"
+LINE = "The email got promoted to a meeting, then demoted back to an email, and the email still had to attend the meeting about itself."
+MAX_CHARS = 200
+OUT_NAME = "entry.txt"
 
 
-def output_dir():
-    """Where entry.txt goes: the harness folder, or /output."""
-    wanted = os.environ.get("MAKEFUN_OUTPUT_DIR")
-    return wanted if wanted else "/output"
+def target_folder():
+    """The harness folder when set, otherwise /output."""
+    folder = os.environ.get("MAKEFUN_OUTPUT_DIR")
+    if folder:
+        return folder
+    return "/output"
 
 
-def check(line):
-    """A valid entry is one non-blank line inside the cap."""
-    stripped = line.strip()
-    if not stripped:
-        raise ValueError("joke line is empty")
-    if stripped != line:
+def validate(line):
+    """One non-blank line, inside the character cap, nothing else."""
+    if not line.strip():
+        raise ValueError("joke line is blank")
+    if line.strip() != line:
         raise ValueError("joke line has stray surrounding space")
     if "\n" in line or "\r" in line:
-        raise ValueError("joke must be a single line")
-    if len(line) > LIMIT:
+        raise ValueError("joke line must stay on one line")
+    if len(line) > MAX_CHARS:
         raise ValueError(
-            "joke is %d characters, over the %d cap" % (len(line), LIMIT)
+            "joke line is %d characters, over the %d cap"
+            % (len(line), MAX_CHARS)
         )
     return line
 
 
-def write_out(line):
-    """Write the line to entry.txt and confirm it by reading back."""
-    folder = output_dir()
+def save(line):
+    """Write entry.txt, then read it back and compare."""
+    folder = target_folder()
     os.makedirs(folder, exist_ok=True)
-    path = os.path.join(folder, NAME)
-    with open(path, "w", encoding="utf-8") as fh:
-        fh.write(line)
-    with open(path, encoding="utf-8") as fh:
-        back = fh.read()
-    if back != line:
+    path = os.path.join(folder, OUT_NAME)
+    with open(path, "w", encoding="utf-8") as handle:
+        handle.write(line)
+    with open(path, encoding="utf-8") as handle:
+        stored = handle.read()
+    if stored != line:
         raise ValueError("entry.txt does not match the joke line")
     return path
 
 
-def main():
-    line = check(JOKE)
-    path = write_out(line)
+def run():
+    line = validate(LINE)
+    path = save(line)
     print("wrote 1 line, %d characters, to %s" % (len(line), path))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run())

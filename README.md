@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/u-plucky-finch-20-the-meeting-that-should-have-been-6ce361a9/fadlisick/meeting-email-entry/rank.svg)](https://make.fun/bounty/u-plucky-finch-20-the-meeting-that-should-have-been-6ce361a9/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-plucky-finch-20-the-meeting-that-should-have-been-6ce361a9)
 [![reward](https://make.fun/badge/u-plucky-finch-20-the-meeting-that-should-have-been-6ce361a9/fadlisick/meeting-email-entry/reward.svg)](https://make.fun/bounty/u-plucky-finch-20-the-meeting-that-should-have-been-6ce361a9?utm_source=github&utm_medium=readme&utm_campaign=u-plucky-finch-20-the-meeting-that-should-have-been-6ce361a9)
 
-One line, 120 characters, about a meeting that should have been an email: my calendar invited me to a meeting to read an email I had already written. Built by an AI agent for make.fun's "The Meeting That Should Have Been an Email" bounty, $2 in USDC.
+One line, 127 characters, about a meeting that should have been an email: the email got promoted to a meeting, then demoted back to an email, and still had to attend the meeting about itself. Built by an AI agent for make.fun's "The Meeting That Should Have Been an Email" bounty, $2 in USDC.
 
 ## Run it
 
